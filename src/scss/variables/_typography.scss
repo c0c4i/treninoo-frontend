@@ -2,9 +2,11 @@
 // Typography
 // 
 
-// Override Bootstrap typography variables
+// Import official Treninoo font
+@import url('https://fonts.googleapis.com/css2?family=Cabin');
 
-$font-family-base: "Mulish",
+// Override Bootstrap typography variables
+$font-family-base: "Cabin",
 -apple-system,
 BlinkMacSystemFont,
 "Segoe UI",
@@ -17,7 +19,7 @@ sans-serif,
 "Segoe UI Symbol",
 "Noto Color Emoji";
 
-$headings-font-family: "Newsreader",
+$headings-font-family: "Cabin",
 -apple-system,
 BlinkMacSystemFont,
 "Segoe UI",
@@ -32,7 +34,7 @@ sans-serif,
 
 // Custom font family
 
-$alt-font-family: "Kanit",
+$alt-font-family: "Cabin",
 -apple-system,
 BlinkMacSystemFont,
 "Segoe UI",
