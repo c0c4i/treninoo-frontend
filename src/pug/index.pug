@@ -1,0 +1,189 @@
+- const screens = { treno: 'Cerca un treno', ricerca: 'Trova le soluzioni', stazione: 'Arrivi e partenze', preferiti: 'I tuoi preferiti' }
+
+mixin device(...names)
+    .device-wrapper.mx-auto
+        .device
+            if names.length === 1
+                .screen
+                    img.screen-img(src=`assets/img/screen-${names[0]}.webp`, alt=screens[names[0]])
+            else
+                .screen.tab-content
+                    each name, i in names
+                        .tab-pane.fade(id=`screen-${name}`, role='tabpanel', class=i === 0 ? 'show active' : '')
+                            img.screen-img(src=`assets/img/screen-${name}.webp`, alt=screens[name])
+
+mixin badges
+    a.me-lg-3.mb-4.mb-lg-0(href='https://play.google.com/store/apps/details?id=it.samuelebesoli.treninoo', target='_blank', rel='noopener')
+        img.app-badge(src='assets/img/google-play-badge.svg', alt='Disponibile su Google Play')
+    a(href='https://apps.apple.com/us/app/treninoo/id1574219058', target='_blank', rel='noopener')
+        img.app-badge(src='assets/img/app-store-badge.svg', alt="Scarica su App Store")
+
+//- a feature is also the tab that shows its screen on the phone
+mixin feature(name, icon, title, active)
+    button.feature-tab(type='button', role='tab', data-bs-toggle='tab', data-bs-target=`#screen-${name}`, aria-controls=`screen-${name}`, aria-selected=active ? 'true' : 'false', class=active ? 'active' : '')
+        i.icon-feature.text-gradient.d-block.mb-3(class='bi-' + icon)
+        h3.font-alt= title
+        p.text-muted.mb-0
+            block
+
+-
+    const reviews = [
+      { text: 'Treninoo non cedere al capitalismo, ti amo', year: 2025 },
+      { text: "grazie per aver fatto un'applicazione che mi permette di contare i treni velocemente e senza provarmi a vendere qualcosa", year: 2025 },
+      { text: 'Avrei dato anche 6 ⭐. App leggera, ottima grafica, veloce, intuitiva. Complimenti!!!! …', year: 2025 },
+      { text: 'App FANTASTICA! La uso tutti i giorni per andare in università. UI molto intuitiva e carina.', year: 2020 },
+      { text: 'Utente Treninoo sin dal primo giorno. Complimenti alla sviluppatore. 10/10', year: 2026 },
+      { text: 'Decisamente perfetto, grazie mi trovo da dio a sapere i binari per tempo 🤩', year: 2025 },
+    ]
+
+doctype html
+html(lang='it')
+
+    head
+
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+        meta(name='description', content='Treninoo: cerca un treno con il suo codice, trova le soluzioni tra due stazioni e salva i tuoi treni preferiti.')
+        meta(name='author', content='Samuele Besoli')
+        meta(name='theme-color', content='#C4152B')
+
+        title Treninoo
+
+        // Open Graph / Facebook
+        meta(property='og:type', content='website')
+        meta(property='og:url', content='https://treninoo.it/')
+        meta(property='og:title', content='Treninoo')
+        meta(property='og:description', content="Basta app lente e difficili da usare! Con Treninoo hai tutte le informazioni sui tuoi treni preferiti è semplice come un paio di tap, ma soprattutto senza stress!")
+        meta(property='og:image', content='https://treninoo.it/assets/img/treninoo-icon.png')
+
+        // Twitter
+        meta(name='twitter:card', content='summary')
+        meta(name='twitter:url', content='https://treninoo.it/')
+        meta(name='twitter:title', content='Treninoo')
+        meta(name='twitter:description', content="Basta app lente e difficili da usare! Con Treninoo hai tutte le informazioni sui tuoi treni preferiti è semplice come un paio di tap, ma soprattutto senza stress!")
+        meta(name='twitter:image', content='https://treninoo.it/assets/img/treninoo-icon.png')
+
+        link(rel='icon', type='image/png', href='assets/favicon.png')
+        link(rel='apple-touch-icon', href='assets/apple-touch-icon.png')
+
+        // Bootstrap icons
+        link(href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css', rel='stylesheet')
+
+        // Google fonts
+        link(rel='preconnect', href='https://fonts.gstatic.com')
+        link(href='https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap', rel='stylesheet')
+
+        link(href='css/styles.css', rel='stylesheet')
+
+    body#page-top
+
+        // Navigation
+        nav#mainNav.navbar.navbar-expand-lg.navbar-light.fixed-top.shadow-sm
+            .container.px-5
+                a.navbar-brand.fw-bold.d-flex.align-items-center(href='#page-top')
+                    img.me-2.rounded-3(src='assets/img/treninoo-icon.png', alt='', style='height: 2rem;')
+                    | Treninoo
+                button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Apri menu')
+                    | Menu
+                    i.bi-list
+                #navbarResponsive.collapse.navbar-collapse
+                    ul.navbar-nav.ms-auto.me-4.my-3.my-lg-0
+                        li.nav-item
+                            a.nav-link.me-lg-3(href='#features') Funzionalità
+                        li.nav-item
+                            a.nav-link.me-lg-3(href='#reviews') Recensioni
+                        li.nav-item
+                            a.nav-link.me-lg-3(href='#download') Download
+                    a.btn.btn-primary.rounded-pill.px-3.mb-2.mb-lg-0(href='https://github.com/c0c4i/treninoo', target='_blank', rel='noopener')
+                        span.d-flex.align-items-center
+                            i.bi-github.me-2
+                            span.small GitHub
+
+        // Masthead
+        header.masthead
+            .container.px-5
+                .row.gx-5.align-items-center
+                    .col-lg-6
+                        .mb-5.mb-lg-0.text-center.text-lg-start
+                            h1.display-1.lh-1.mb-3 Il tuo treno, con un click.
+                            p.lead.fw-normal.text-muted.mb-5 Cerca un treno con il suo codice, trova tutte le soluzioni tra due stazioni e salva i tuoi treni nei preferiti.
+                            .d-flex.flex-column.flex-lg-row.align-items-center
+                                +badges
+                    .col-lg-6
+                        .masthead-device-mockup
+                            include includes/gradient-circle
+                            include includes/shape-1
+                            include includes/shape-2
+                            +device('treno')
+
+        // Features
+        section#features
+            .container.px-5
+                .row.gx-5.align-items-center
+                    .col-lg-8.order-lg-1.mb-5.mb-lg-0
+                        .container-fluid.px-5(role='tablist', aria-label='Schermate')
+                            .row.gx-5.gy-4
+                                .col-md-6
+                                    +feature('treno', 'search', 'Cerca un treno', true)
+                                        | Inserisci il numero del treno e scopri subito ritardi, binari e fermate.
+                                .col-md-6
+                                    +feature('ricerca', 'signpost-split', 'Trova le soluzioni')
+                                        | Scegli partenza e destinazione per vedere tutti i treni disponibili.
+                                .col-md-6
+                                    +feature('stazione', 'geo-alt', 'Arrivi e partenze')
+                                        | Cerca la tua stazione per vedere tutti i treni in arrivo e in partenza.
+                                .col-md-6
+                                    +feature('preferiti', 'star', 'Preferiti')
+                                        | Salva i treni che prendi ogni giorno e ritrovali in un attimo.
+                    .col-lg-4.order-lg-0
+                        .features-device-mockup
+                            include includes/gradient-circle
+                            include includes/shape-1
+                            include includes/shape-2
+                            +device('treno', 'ricerca', 'stazione', 'preferiti')
+
+        // Why
+        section.bg-light
+            .container.px-5
+                .row.gx-5.align-items-center.justify-content-center.justify-content-lg-between
+                    .col-12.col-lg-5
+                        h2.display-4.lh-1.mb-4 Semplice e veloce
+                        p.lead.fw-normal.text-muted.mb-5.mb-lg-0 Treninoo è nato perché l'app che usavo per i treni era troppo lenta: volevo un'app semplice che con un click mi desse tutte le informazioni di cui avevo bisogno. Con l'arrivo previsto sai anche a che ora arriverai, ritardo compreso.
+                    .col-sm-8.col-md-6
+                        img.img-fluid.rounded-4.shadow(src='assets/img/predictive-arrival.png', alt='Esempio di arrivo previsto')
+
+        // Reviews
+        section#reviews
+            .container.px-5
+                h2.display-4.lh-1.mb-3.text-center Dicono di noi
+                p.lead.text-muted.text-center.mb-5
+                    | Recensioni vere dal
+                    |
+                    a(href='https://play.google.com/store/apps/details?id=it.samuelebesoli.treninoo', target='_blank', rel='noopener') Google Play Store
+                .row.row-cols-1.row-cols-md-2.row-cols-lg-3.g-4
+                    each review in reviews
+                        .col
+                            figure.review.h-100.mb-0
+                                .text-primary.mb-3(aria-label='5 stelle su 5')
+                                    each _ in [1, 2, 3, 4, 5]
+                                        i.bi-star-fill.me-1
+                                blockquote.mb-3
+                                    p.mb-0 “#{review.text}”
+                                figcaption.text-muted.small Utente Google Play · #{review.year}
+
+        // Download
+        section#download.bg-gradient-primary-to-secondary
+            .container.px-5
+                h2.text-center.text-white.font-alt.mb-4 Scarica l'app!
+                .d-flex.flex-column.flex-lg-row.align-items-center.justify-content-center
+                    +badges
+
+        // Footer
+        footer.bg-black.text-center.py-5
+            .container.px-5
+                .text-white-50.small
+                    .mb-2 &copy; Treninoo #{new Date().getFullYear()}
+                    a(href='https://github.com/c0c4i/treninoo', target='_blank', rel='noopener') GitHub
+
+        script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js')
+        script(src='js/scripts.js')
