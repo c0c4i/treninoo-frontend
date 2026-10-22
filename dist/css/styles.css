@@ -11054,6 +11054,7 @@ section {
   border: 0;
   border-radius: 1.5rem;
   background: none;
+  color: inherit;
   text-align: center;
   opacity: 0.55;
   transition: opacity 0.2s, background-color 0.2s;
